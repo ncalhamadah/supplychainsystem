@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="mb-4">Dashboard</h3>
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="card text-bg-light"><div class="card-body"><div class="fw-bold">Total Buy‑In Units</div><div class="fs-3">{{ total_buyin_units }}</div></div></div></div>
+  <div class="col-md-3"><div class="card text-bg-light"><div class="card-body"><div class="fw-bold">Total Sell‑Out Units</div><div class="fs-3">{{ total_sellout_units }}</div></div></div></div>
+  <div class="col-md-3"><div class="card text-bg-light"><div class="card-body"><div class="fw-bold">Customers</div><div class="fs-3">{{ num_customers }}</div></div></div></div>
+  <div class="col-md-3"><div class="card text-bg-light"><div class="card-body"><div class="fw-bold">Products</div><div class="fs-3">{{ num_products }}</div></div></div></div>
+</div>
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card"><div class="card-body">
+      <div class="fw-bold mb-1">Revenue (estimate)</div>
+      <div class="fs-4">AED {{ '%.2f'|format(total_revenue) }}</div>
+      <div class="text-muted">Gross Margin (approx): AED {{ '%.2f'|format(gross_margin) }}</div>
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card"><div class="card-body">
+      <div class="fw-bold mb-2">Top Customers</div>
+      <ol class="mb-0">
+        {% for name, qty in top_customers %}
+          <li>{{ name }} — {{ qty }}</li>
+        {% else %}
+          <li class="text-muted">No data yet</li>
+        {% endfor %}
+      </ol>
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card"><div class="card-body">
+      <div class="fw-bold mb-2">Top Products</div>
+      <ol class="mb-0">
+        {% for name, qty in top_products %}
+          <li>{{ name }} — {{ qty }}</li>
+        {% else %}
+          <li class="text-muted">No data yet</li>
+        {% endfor %}
+      </ol>
+    </div></div>
+  </div>
+</div>
+{% endblock %}

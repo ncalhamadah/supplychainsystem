@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Customers</h3>
+  <a class="btn btn-primary" href="{{ url_for('new_customer') }}">New Customer</a>
+</div>
+<table class="table table-striped">
+  <thead><tr><th>Name</th><th>Channel</th><th>Contact</th><th>Created</th><th></th></tr></thead>
+  <tbody>
+  {% for c in customers %}
+    <tr>
+      <td>{{ c.name }}</td>
+      <td>{{ c.channel or '-' }}</td>
+      <td>{{ c.contact_name or '-' }}</td>
+      <td>{{ c.created_at.strftime('%Y-%m-%d') }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('edit_customer', cid=c.id) }}">Edit</a>
+        <form method="POST" action="{{ url_for('delete_customer', cid=c.id) }}" class="d-inline" onsubmit="return confirm('Delete customer?')">
+          <button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

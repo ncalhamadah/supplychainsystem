@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Sell‑Outs (Reported)</h3>
+  <a class="btn btn-primary" href="{{ url_for('new_sellout') }}">New Sell‑Out</a>
+</div>
+<table class="table table-striped">
+  <thead><tr><th>Date</th><th>Customer</th><th>Product</th><th>Qty</th></tr></thead>
+  <tbody>
+  {% for i in items %}
+    <tr>
+      <td>{{ i.date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ i.customer.name }}</td>
+      <td>{{ i.product.sku }} — {{ i.product.name }}</td>
+      <td>{{ i.quantity }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

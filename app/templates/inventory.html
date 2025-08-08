@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Inventory</h3>
+  <a class="btn btn-primary" href="{{ url_for('new_lot') }}">Add Lot</a>
+</div>
+<table class="table table-striped">
+  <thead><tr><th>Product</th><th>Qty</th><th>Unit Cost</th><th>Received</th></tr></thead>
+  <tbody>
+  {% for l in lots %}
+    <tr>
+      <td>{{ l.product.sku }} — {{ l.product.name }}</td>
+      <td>{{ l.quantity }}</td>
+      <td>{{ '%.2f'|format(l.unit_cost) }}</td>
+      <td>{{ l.received_date.strftime('%Y-%m-%d') }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
